@@ -1,0 +1,26 @@
+version: "3"
+services:
+  app:
+    image: rss2mm:1.0
+    build:
+      context: ./
+      args:
+        - http_proxy=${http_proxy}
+        - https_proxy=${https_proxy}
+        - no_proxy=${no_proxy}
+    environment:
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - no_proxy=${no_proxy}
+    volumes:
+      - ./tool:/opt/rss2mm
+    working_dir: /opt/rss2mm
+    # tty: true
+    command: [
+      "python", 
+      "rss2mm.py", 
+      "--url", 
+      "http://path-to-mattermost/hooks/internal-webhook-id",
+      "--username", 
+      "FeedBot"
+      ]
