@@ -128,6 +128,4 @@ if __name__ == "__main__":
                         db.save_new_entries(entries)
             except requests.exceptions.MissingSchema as e:
                 logger.warn(e)
-            except Exception as e:
-                logger.error(e)
 
