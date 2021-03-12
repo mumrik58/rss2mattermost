@@ -92,6 +92,8 @@ if __name__ == "__main__":
     p.add_argument('--username', help='username for mattermost incomming webhook', default='Bot')
     p.add_argument('--db', help='database filepath', default='entries.csv')
     p.add_argument('--feed', help='feed filepath', default='feeds.csv')
+    p.add_argument('--feed-encoding', help='encoding of feed file', default='utf-8')
+
 
     args = p.parse_args()
     feed = args.feed
@@ -99,7 +101,7 @@ if __name__ == "__main__":
     db = db(args.db)
     
     logger.debug('reading %s' % feed)
-    with open(feed, 'r', encoding='utf-8') as f:
+    with open(feed, 'r', encoding=args.feed_encoding) as f:
         reader = csv.reader(f)
         for line in reader:
             try:
